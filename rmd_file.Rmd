@@ -109,15 +109,15 @@ nWBV_M=mymatrix[which(mymatrix[,1]==2),]
 
 ### 3. Use the two-sample t-test
 The two-sample t-test is a method that tests whether the unknown population means of two groups are equal or not.
-We use two-sample t-test to test whether average nWBV of female and average nWBV of male are equal or not.
-We can use the two-sample t-test when our data values are independent and the two independent groups have equal variances.
-We first need to check if nWBV_F and nWBV_M have same variance
+I use two-sample t-test to test whether average nWBV of female and average nWBV of male are equal or not.
+I can use the two-sample t-test when our data values are independent and the two independent groups have equal variances.
+I first need to check if nWBV_F and nWBV_M have same variance
 
 **Check if two groups have equal variance**
 ```{r}
 var.test(nWBV_F[,2],nWBV_M[,2])
 ``` 
-Since the p-value is greater than significant level of 0.05, we fail to reject the null hypothesis. Then we can say the variances of two groups are equal.
+Since the p-value is greater than significant level of 0.05, I fail to reject the null hypothesis. Then I can say the variances of two groups are equal.
 
 **Two Sample t-test**  
 Since the variance of two groups are equal, we can use the two-sample t-test with **var.equal = TRUE**. 
@@ -129,7 +129,7 @@ res$p.value
 The p-value is bigger than 0.05, which means we do not reject H~0~. 
 
 **Conclusion for first hypothesis**    
-Therefore, we can conclude that there is insufficient evidence showing that there is significant difference between Dementia of male and female
+Therefore, I can conclude that there is insufficient evidence showing that there is significant difference between Dementia of male and female
 
 ### 4. Effect of missing data
 
@@ -164,7 +164,7 @@ t.test(nWBV_F_MAR[,2],nWBV_M_MAR[,2],var.equal = TRUE)
 The p-value is bigger than 0.05. DO NOT Reject H~0~. There is insufficient evidence showing that there is significant difference between Dementia of male and female.  
 
 #### 2. Compare the data with missing values at random and original data
-If we look at the mean x and mean y with and without missing values at randomly, we can see that the difference is very samll, so there is not a significant difference.
+If I look at the mean x and mean y with and without missing values at randomly, I can see that the difference is very samll, so there is not a significant difference.
 
 
 #### 3. Missing Values Not At Random(MNAR)
@@ -191,13 +191,13 @@ The p-value is bigger than 0.05. DO NOT Reject H~0~.
 There is insufficient evidence showing that there is significant difference between Dementia of male and female.  
 
 **Conclusion**  
-Compare the data with missing values not at random and original data: If we look at the mean x and mean y with and without missing values not at randomly, we can see that the difference is still very small, so there is not a significant difference.
+Compare the data with missing values not at random and original data: If I look at the mean x and mean y with and without missing values not at randomly, I can see that the difference is still very small, so there is no significant difference.
 
 
 # Multiple Regression Analysis
 
 ## Second hypothesis
-For the second hypothesis, we are interested in finding out which variable is significant. Our null hypothesis is that each variable is equal to 0 and our alternative hypothesis is that at least one variable is not equal to 0, making that variable significant.
+For the second hypothesis, I am interested in finding out which variable is significant. My null hypothesis is that each variable is equal to 0 and our alternative hypothesis is that at least one variable is not equal to 0, making that variable significant.
 
 H~0~: $\mu_{M.FM}$ = $\mu_{Age}$ = $\mu_{Educ}$ = $\mu_{SES}$ = $\mu_{MMSE}$ = $\mu_{CDR}$ = $\mu_{eTIV}$ = $\mu_{ASF}$
 
@@ -207,7 +207,7 @@ H~1~: $\mu_{M.FM}$ $\neq$ $\mu_{Age}$ $\neq$ $\mu_{Educ}$ $\neq$ $\mu_{SES}$ $\n
 
 ## Method steps
 
-We use R to read 'oasis_cross-sectional.csv' files for data analysis.
+I use R to read 'oasis_cross-sectional.csv' files for data analysis.
 Through using **stringsAsFactors = TRUE**, it is appropriate to convert nominal variables to factor variables.
 ```{r}
 setwd("/Users/soyoungchung/Library/Mobile Documents//STONYBROOK/G/AMS 572")
@@ -225,7 +225,7 @@ mean(is.na(data)) #15.7%of instances have missing values
 mean(!complete.cases(data))#50% of the instances contained one or more missing values
 ```
 
-We can use the **md.pattern()** function in **mice** package to observe the missing values more intuitively, which it generates a table showing the pattern of missing values in the form of a matrix or data box.
+I can use the **md.pattern()** function in **mice** package to observe the missing values more intuitively, which it generates a table showing the pattern of missing values in the form of a matrix or data box.
 ```{r,out.width = '40%',fig.show='hold',fig.align='center'}
 md.pattern(data)
 ```
@@ -237,7 +237,7 @@ matrixplot(data)
 ```
 
 ### 2. To use Multiple interpolation to impute data.
-Through looking "mice: Multivariate Imputation by Chained Equations in R. Journal of Statistical Software" paper, We learned how to use mice to impute data.
+Through looking "mice: Multivariate Imputation by Chained Equations in R. Journal of Statistical Software" paper, I learned how to use mice to impute data.
 ```{r echo=FALSE, out.width = '60%',fig.show='hold',fig.align='center'}
 #knitr::include_graphics("C:/Users/86188/Downloads/mice.png")
 ```
@@ -255,26 +255,26 @@ stripplot(imp,pch=19,cex=1.2,alpha=.3)
 ```
 
 ### 3. Building model
-We will use the multiple linear regression to build the model. Multiple linear regression is an extension of simple linear regression model. It can evaluate more complex relationships because it can predict a response variable (y) based on multiple different predictor variables (x).
+I will use the multiple linear regression to build the model. Multiple linear regression is an extension of simple linear regression model. It can evaluate more complex relationships because it can predict a response variable (y) based on multiple different predictor variables (x).
   In multiple regression we fit a model of the form(excluding the error)
         $$y = \beta_0 + \beta_1x_1 + \beta_2x_2 +...+ \beta_kx_k $$
 where $x_1,x_2,...,x_k$ are $k \geq 2$ predictor variables and $\beta_0,\beta_1,\beta_2,...,\beta_k$ are $k+1$ unknown parameters.
 check how goodness of fit this model:
-we use the residuals defined by
+I use the residuals defined by
       $$\varepsilon_i = y_i - \hat{y_i} \qquad(i = 1,2,...,n)$$
 where the $\bar{y_i}$ are the fitted values:
       $$\hat{y_i} = \hat{\beta_0} +\hat{\beta_1}x_{i1}+...+\hat{\beta_k}x_{ik} \qquad(i = 1,2,...,n)$$
-we can use Chapter 10 error sum of squares as overall measure:
+I can use Chapter 10 error sum of squares as overall measure:
       $$SSE = \sum_{i=1}^{n}\varepsilon_i^2$$
-we compare the SSE to the total sum of squares, $SST = \sum(y_i-\bar{y})^2$.
+I compare the SSE to the total sum of squares, $SST = \sum(y_i-\bar{y})^2$.
 As in Chapter 10, define the regression sum of squares given by:
       $$SSR = SST - SSE$$
 The coefficient of multiple determination is the ratio of SSR to SST:
       $$r^2 = \frac{SSR}{SST} = 1 - \frac{SSE}{SST} $$ 
 In multiple linear regression, the $r^2$ represents the correlation coefficient between the observed values of the response variable (y) and the fitted values of y. Thus, the value of $r$ will always be positive and will range from 0 to 1, with values closer to 1 representing better fits. The higher $r^2$, the better the model.
-We want to build a model for estimating Normalize Whole Brain Volume based on Gender, Age, Education Level, Socioeconomic Status, Mini Mental State Examination, Clinical Dementia Rating, Estimated Total Intracranial Volume, and Atlas Scaling Factor, as follows:
+I want to build a model for estimating Normalize Whole Brain Volume based on Gender, Age, Education Level, Socioeconomic Status, Mini Mental State Examination, Clinical Dementia Rating, Estimated Total Intracranial Volume, and Atlas Scaling Factor, as follows:
       $$nWBV = \beta_0+\beta_1M.F+\beta_2Age+\beta_3Educ+\beta_4SES+\beta_5MMSE+\beta_6CDR+\beta_7eTIV+\beta_8ASF$$
-we can compute the model's coefficients in R:
+I can compute the model's coefficients in R:
 
 ```{r}
 fit = lm(nWBV~M.F+Age+Educ+SES+MMSE+CDR+eTIV+ASF,data = data2)
@@ -291,25 +291,25 @@ The model equation can be written as follows:
     $$nWBV = 8.183e^{-1} - 2.526e^{-3}x_1 - 1.890e^{-3}x_2 +2.151e^{-3}x_3 + 2.168e^{-3}x_4 +2.717e^{-3}x_5 - 2.118e^{-2}x_6 - 2.627e^{-5}x_7 + 2.167e^{-2}x_8$$
     
 ### 4. Use Best subsets regression to find the best model.
-Best subset regression is a model selection method that tests all possible combinations of predictor variables. We can determine which are the best predictor variables by using best subset regression, and then confirm the optimal model according to certain statistical criteria.
+Best subset regression is a model selection method that tests all possible combinations of predictor variables. I can determine which are the best predictor variables by using best subset regression, and then confirm the optimal model according to certain statistical criteria.
 
-Through using **regsubsets()** function in **leaps** package, we can find the best predictor variables in the linear model.
+Through using **regsubsets()** function in **leaps** package, I can find the best predictor variables in the linear model.
 ```{r}
 leap = regsubsets(nWBV~M.F+Age+Educ+SES+MMSE+CDR+eTIV+ASF,data = data2)
 summary(leap)
 
 ```
-Through **summary()** function, we get some optimality criteria.
-We will use $r^2$,$adjuested\;r^2$,$C_p$,$BIC$ to select best model.
+Through **summary()** function, I get some optimality criteria.
+I will use $r^2$,$adjuested\;r^2$,$C_p$,$BIC$ to select best model.
 ```{r}
 leap_s = summary(leap)
 names(leap_s)
 ```
-We find that the $r^2$ statistic increases from 76.4% to 82.5%. Thus, the $r^2$ statistic increases monotonically as more variables are included.
+I find that the $r^2$ statistic increases from 76.4% to 82.5%. Thus, the $r^2$ statistic increases monotonically as more variables are included.
 ```{r}
 leap_s$rsq
 ```
-We can see that the following model selection have the same number 4 for the best set of predictor variables.
+I can see that the following model selection have the same number 4 for the best set of predictor variables.
 ```{r}
 data.frame(
   adj_r2_max = which.max(leap_s$adjr2),
@@ -329,7 +329,7 @@ plot(leap, scale = "bic")
 
 ```
   
-Finally, we get the best 4 predictor variables to make the best linear model.
+Finally, I get the best 4 predictor variables to make the best linear model.
 ```{r}
 coef(leap, 4)
 ```
@@ -344,14 +344,14 @@ $$nWBV = 8.8402e^{-1} - 1.8602e^{-3}x_2 + 2.7637^{-3}x_5 - 2.1499e^{-2}x_6 - 4.7
 f = lm(nWBV~Age+MMSE+CDR+eTIV,data=data2)
 summary(f)
 ```
-We can see that these 4 predictor variables give a better $r^2$ value which leads to a better and more concise linear model than a model with 8 predictor variables. 
+I can see that these 4 predictor variables give a better $r^2$ value which leads to a better and more concise linear model than a model with 8 predictor variables. 
 Thus, these 4 predictor variables will have the best linear model, as following,
 $$nWBV = 8.8402e^{-1} - 1.8602e^{-3}Age + 2.7637^{-3}MMSE - 2.1499e^{-2}CDR - 4.7757e^{-5}eTIV$$
 
 ### 5. Effect of missing data. 
-We believe that our data has missing not at random values. This is likely due to the fact that the  patient may have refused testing on a certain test, or refused to answer some questions during the questionnaire.
+I believe that our data has missing not at random values. This is likely due to the fact that the  patient may have refused testing on a certain test, or refused to answer some questions during the questionnaire.
 For example, the questionnaire asks about education level and social status. This may not have been a mandatory question needed to be answered or the patient may not feel like answering this question due to social norms or perhaps embarrassment. Regardless, this creates a clear bias in the data and thus the analysis.
-For the missing not at random values, we have decided to use MICE to impute the missing values from the data set.
+For the missing not at random values, I have decided to use MICE to impute the missing values from the data set.
 The hypothesis that we are testing is the same as hypothesis 2.
 
 This is the model without imputing for missing data
@@ -388,7 +388,7 @@ As you can see from both outputs, the fit ($r^2$ value) for the model with imput
 
 
 
-Now, we want to simulate a scenario where our data has missing completely at random values. For this, we will take only about 80% of our data which has 348 rows instead of 436. Next, we ran the regression once more and these were the results.
+Now, I want to simulate a scenario where our data has missing completely at random values. For this, we will take only about 80% of our data which has 348 rows instead of 436. Next, I ran the regression once more and these were the results.
 
 ```{r,out.width = '70%',fig.show='hold',fig.align='center'}
 adjusteddata<-data[sample(nrow(data),0.8*nrow(data)),]
