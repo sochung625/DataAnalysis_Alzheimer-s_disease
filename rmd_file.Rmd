@@ -31,7 +31,7 @@ library(lattice)
 ```
 
 # Introduction
-According to the Alzheimer’s Association, Alzheimer’s disease is a type of disease that negatively affects memory, thinking and behavior. Oftentimes, Alzheimer’s disease spirals out of control with the people who have it and it severely affects their life especially day to day activities. There has yet to be a cure for this disease but there is a lot of research going on pertaining to Alzheimer’s disease. There are also a lot of unknown causes pertaining to Alzheimer's disease. The dataset that we used is a cross-sectional dataset found on kaggle.com and the dataset is from OASIS (Open Access Series of Imaging Studies). There are 436 rows of 12 variables
+According to the Alzheimer’s Association, Alzheimer’s disease is a type of disease that negatively affects memory, thinking and behavior. Oftentimes, Alzheimer’s disease spirals out of control with the people who have it and it severely affects their life especially day to day activities. There has yet to be a cure for this disease but there is a lot of research going on pertaining to Alzheimer’s disease. There are also a lot of unknown causes pertaining to Alzheimer's disease. The dataset that I used is a cross-sectional dataset found on kaggle.com and the dataset is from OASIS (Open Access Series of Imaging Studies). There are 436 rows of 12 variables
 
 **ID** 
 Identification(436 unique values)
@@ -413,7 +413,7 @@ plot(fit3)
 
 The model simulated with missing at random values has an equation written as follow:
     $$nWBV = 7.474e^{-1} - 7.041e^{-3}x_1 - 2.504e^{-3}x_2 +7.051e^{-4}x_3 + 2.869e^{-3}x_4 +1.792e^{-3}x_5 - 2.069e^{-2}x_6 + 2.976e^{-5}x_7 + 7.429e^{-2}x_8$$
-This model has quite similar values to the model with missing not at random values. It doesn't change our conclusion at all as we have similar coefficients for each variable and a negligible difference in $r^2$ fitted value. The missing values are mostly in education and social status, and from our results, these values are insignificant to nWBV. However, to eliminate the bias in our data, we can eliminate those patients who refused to answer the questions fully and therefore we can maximize our data collection.
+This model has quite similar values to the model with missing not at random values. It doesn't change our conclusion at all as we have similar coefficients for each variable and a negligible difference in $r^2$ fitted value. The missing values are mostly in education and social status, and from our results, these values are insignificant to nWBV. However, to eliminate the bias in our data, I can eliminate those patients who refused to answer the questions fully and therefore I can maximize our data collection.
 
 
 **Report Contribution**  
