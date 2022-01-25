@@ -83,7 +83,7 @@ H~0~: $\mu_{f}$ = $\mu_{m}$ vs. H~1~: $\mu_{f}$ $\neq$ $\mu_{m}$
 
 ## Methodology 
 ### 1. Load and convert data
-We use R to read 'oasis_cross-sectional.csv' files for data analysis.
+I use R to read 'oasis_cross-sectional.csv' files for data analysis.
 ```{r}
 setwd("/Users/soyoungchung/Library/Mobile Documents//STONYBROOK/G/AMS 572")
 data = read.csv('oasis_cross-sectional.csv')
@@ -120,13 +120,13 @@ var.test(nWBV_F[,2],nWBV_M[,2])
 Since the p-value is greater than significant level of 0.05, I fail to reject the null hypothesis. Then I can say the variances of two groups are equal.
 
 **Two Sample t-test**  
-Since the variance of two groups are equal, we can use the two-sample t-test with **var.equal = TRUE**. 
+Since the variance of two groups are equal, I can use the two-sample t-test with **var.equal = TRUE**. 
 ```{r}
 res<-t.test(nWBV_F[,2],nWBV_M[,2], var.equal = TRUE)
 res
 res$p.value
 ```
-The p-value is bigger than 0.05, which means we do not reject H~0~. 
+The p-value is bigger than 0.05, which means I do not reject H~0~. 
 
 **Conclusion for first hypothesis**    
 Therefore, I can conclude that there is insufficient evidence showing that there is significant difference between Dementia of male and female
@@ -212,7 +212,7 @@ Through using **stringsAsFactors = TRUE**, it is appropriate to convert nominal 
 ```{r}
 setwd("/Users/soyoungchung/Library/Mobile Documents//STONYBROOK/G/AMS 572")
 data = read.csv('oasis_cross-sectional.csv',stringsAsFactors = TRUE)
-# Verify that the data is converted to the form we expected earlier
+# Verify that the data is converted to the form I expected earlier
 str(data)
 
 ```
@@ -256,7 +256,7 @@ stripplot(imp,pch=19,cex=1.2,alpha=.3)
 
 ### 3. Building model
 I will use the multiple linear regression to build the model. Multiple linear regression is an extension of simple linear regression model. It can evaluate more complex relationships because it can predict a response variable (y) based on multiple different predictor variables (x).
-  In multiple regression we fit a model of the form(excluding the error)
+  In multiple regression, fit a model of the form(excluding the error)
         $$y = \beta_0 + \beta_1x_1 + \beta_2x_2 +...+ \beta_kx_k $$
 where $x_1,x_2,...,x_k$ are $k \geq 2$ predictor variables and $\beta_0,\beta_1,\beta_2,...,\beta_k$ are $k+1$ unknown parameters.
 check how goodness of fit this model:
@@ -281,7 +281,7 @@ fit = lm(nWBV~M.F+Age+Educ+SES+MMSE+CDR+eTIV+ASF,data = data2)
 summary(fit)
 
 ```
-After checking the summary, we can find the following results:
+After checking the summary, I can find the following results:
 
 | $Intercept$ | $M.F =x_1$ | $Age =x_2$ | $Educ =x_3$ | $SES =x_4$ | $MMSE =x_5$ | $CDR = x_6$ | $eTIV = x_7$ | $ASF = x_8$ |
 | :---------: | :--------: | :--------: | :---------: | :--------: | :---------: | :---------: | :----------: | :---------: |
@@ -352,7 +352,7 @@ $$nWBV = 8.8402e^{-1} - 1.8602e^{-3}Age + 2.7637^{-3}MMSE - 2.1499e^{-2}CDR - 4.
 I believe that our data has missing not at random values. This is likely due to the fact that the  patient may have refused testing on a certain test, or refused to answer some questions during the questionnaire.
 For example, the questionnaire asks about education level and social status. This may not have been a mandatory question needed to be answered or the patient may not feel like answering this question due to social norms or perhaps embarrassment. Regardless, this creates a clear bias in the data and thus the analysis.
 For the missing not at random values, I have decided to use MICE to impute the missing values from the data set.
-The hypothesis that we are testing is the same as hypothesis 2.
+The hypothesis that I am testing is the same as hypothesis 2.
 
 This is the model without imputing for missing data
 ```{r}
@@ -388,7 +388,7 @@ As you can see from both outputs, the fit ($r^2$ value) for the model with imput
 
 
 
-Now, I want to simulate a scenario where our data has missing completely at random values. For this, we will take only about 80% of our data which has 348 rows instead of 436. Next, I ran the regression once more and these were the results.
+Now, I want to simulate a scenario where our data has missing completely at random values. For this, I will take only about 80% of our data which has 348 rows instead of 436. Next, I ran the regression once more and these were the results.
 
 ```{r,out.width = '70%',fig.show='hold',fig.align='center'}
 adjusteddata<-data[sample(nrow(data),0.8*nrow(data)),]
@@ -413,7 +413,7 @@ plot(fit3)
 
 The model simulated with missing at random values has an equation written as follow:
     $$nWBV = 7.474e^{-1} - 7.041e^{-3}x_1 - 2.504e^{-3}x_2 +7.051e^{-4}x_3 + 2.869e^{-3}x_4 +1.792e^{-3}x_5 - 2.069e^{-2}x_6 + 2.976e^{-5}x_7 + 7.429e^{-2}x_8$$
-This model has quite similar values to the model with missing not at random values. It doesn't change our conclusion at all as we have similar coefficients for each variable and a negligible difference in $r^2$ fitted value. The missing values are mostly in education and social status, and from our results, these values are insignificant to nWBV. However, to eliminate the bias in our data, I can eliminate those patients who refused to answer the questions fully and therefore I can maximize our data collection.
+This model has quite similar values to the model with missing not at random values. It doesn't change our conclusion at all as I have similar coefficients for each variable and a negligible difference in $r^2$ fitted value. The missing values are mostly in education and social status, and from our results, these values are insignificant to nWBV. However, to eliminate the bias in our data, I can eliminate those patients who refused to answer the questions fully and therefore I can maximize our data collection.
 
 
 **Report Contribution**  
