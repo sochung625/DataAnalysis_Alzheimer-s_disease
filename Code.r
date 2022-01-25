@@ -1,5 +1,4 @@
-##AMS 572 group 12
-# Dennis Feng, Hongbo Yin, Soyoung Chung and Zhiyi Da
+# Co-authors: Dennis Feng, Hongbo Yin, Soyoung Chung and Zhiyi Da
 
 install.packages(c("mice","VIM"))
 install.packages("leaps")
